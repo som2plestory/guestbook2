@@ -24,7 +24,7 @@
 				<td><input type="password" id="input-gpw" name="password"></td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea name="content" cols="64" rows="5"></textarea></td>
+				<td colspan="4"><textarea name="content" cols="66" rows="5"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4"><button type="submit">등록</button></td>
@@ -34,17 +34,17 @@
 	<br/>
 
 	<% 
-		for(GuestbookVo guest :guestList){
+		for(GuestbookVo guestVo :guestList){
 	%>
 			<table  border="1" width="500px">
 				<tr>
-					<td><%=guest.getNo() %></td>
-					<td><%=guest.getName() %></td>
-					<td><%=guest.getRegDate() %></td>
-					<td><a href="/guestbook2/gbc?action=deleteform&no=<%=guest.getNo() %>">삭제</a></td>
+					<td width="30"><%=guestVo.getNo() %></td>
+					<td width="267"><%=guestVo.getName() %></td>
+					<td width="165"><%=guestVo.getRegDate() %></td>
+					<td width="38"><a href="/guestbook2/gbc?action=deleteform&no=<%=guestVo.getNo() %>">삭제</a></td>
 				</tr>
 				<tr>
-					<td colspan="4"><%=guest.getContent() %></td>
+					<td colspan="4"><%=guestVo.getContent() %></td>
 				</tr>
 			</table>
 		    <br/>

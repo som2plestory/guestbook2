@@ -135,7 +135,7 @@ public class GuestbookDao {
 	
 
 	//방명록 삭제
-	public int delete(GuestbookVo guestbookVo) {
+	public int delete(GuestbookVo guestVo) {
 		int count = 0;
 
 		this.getConnection();
@@ -153,8 +153,8 @@ public class GuestbookDao {
 			pstmt = conn.prepareStatement(query);
 
 			// 실행
-			pstmt.setInt(1, guestbookVo.getNo());
-			pstmt.setString(2, guestbookVo.getPassword());
+			pstmt.setInt(1, guestVo.getNo());
+			pstmt.setString(2, guestVo.getPassword());
 
 			count = pstmt.executeUpdate();
 

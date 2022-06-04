@@ -31,31 +31,38 @@ public class GuestbookController extends HttpServlet{
 		System.out.println(action);
 		
 		if ("add".equals(action)) {
-
 			String name = request.getParameter("name");
-			String password = request.getParameter("pass");
+			String password = request.getParameter("password");
 			String content = request.getParameter("content");
 
-			GuestbookDao dao = new GuestbookDao();
-			GuestbookVo vo = new GuestbookVo(name, password, content);
-			dao.insert(vo);
-			System.out.println(vo.toString());
+			GuestbookDao guestDao = new GuestbookDao();
+			GuestbookVo guestVo = new GuestbookVo(name, password, content);
 
-			GuestbookUtil.redirect(request, response, "/guestbook2/gbc");
-
+			//비밀번호(not null) 입력하지 않으면 등록되지 않음
+			if(guestVo.getPassword().equals("")) {
+				System.out.println("방명록 작성 실패");
+				GuestbookUtil.forward(request, response, "WEB-INF/views/user/joinForm.jsp");
+				
+			}else {
+				System.out.println("방명록 작성 성공");
+				guestDao.insert(guestVo);
+				System.out.println(guestVo.toString());
+	
+				GuestbookUtil.redirect(request, response, "/guestbook2/gbc");
+			}
 		} else if ("deleteform".equals(action)) {
 			GuestbookUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
 
 		} else if ("delete".equals(action)) {
 			int no = Integer.parseInt(request.getParameter("no"));
-			String password = request.getParameter("pass");
+			String password = request.getParameter("password");
 
-			GuestbookVo vo = new GuestbookVo();
-			vo.setNo(no);
-			vo.setPassword(password);
-
-			GuestbookDao dao = new GuestbookDao();
-			dao.delete(vo);
+			GuestbookVo guestVo = new GuestbookVo();
+			guestVo.setNo(no);
+			guestVo.setPassword(password);
+			
+			GuestbookDao guestDao = new GuestbookDao();
+			guestDao.delete(guestVo);
 
 			GuestbookUtil.redirect(request, response, "/guestbook2/gbc");
 			
