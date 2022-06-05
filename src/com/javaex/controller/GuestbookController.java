@@ -37,19 +37,13 @@ public class GuestbookController extends HttpServlet{
 
 			GuestbookDao guestDao = new GuestbookDao();
 			GuestbookVo guestVo = new GuestbookVo(name, password, content);
-
-			//비밀번호(not null) 입력하지 않으면 등록되지 않음
-			if(guestVo.getPassword().equals("")) {
-				System.out.println("방명록 작성 실패");
-				GuestbookUtil.forward(request, response, "WEB-INF/views/user/joinForm.jsp");
 				
-			}else {
-				System.out.println("방명록 작성 성공");
-				guestDao.insert(guestVo);
-				System.out.println(guestVo.toString());
-	
-				GuestbookUtil.redirect(request, response, "/guestbook2/gbc");
-			}
+			System.out.println("방명록 작성 성공");
+			guestDao.insert(guestVo);
+			System.out.println(guestVo.toString());
+
+			GuestbookUtil.redirect(request, response, "/guestbook2/gbc");
+			
 		} else if ("deleteform".equals(action)) {
 			GuestbookUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
 
