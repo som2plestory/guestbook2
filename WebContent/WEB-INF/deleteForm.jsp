@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
 		<button type="submit">확인</button>
 		<br>
 		<a href="/guestbook2/gbc">메인으로 돌아가기</a>
-		<input type="hidden" name="no" value="<%=request.getParameter("no")%>"><br>
+		<input type="hidden" name="no" value="${Param.no}"><br>
 		
 	
 	</form>
